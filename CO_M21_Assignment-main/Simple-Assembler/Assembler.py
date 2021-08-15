@@ -273,8 +273,8 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(lst[ind][0:3]=='cmp'):								#Handling Type E Instructions					
-		if(lst[ind][4]=='R'):								#Developer:-Rahul
+	if(lst[ind][0:3]=='cmp'):													
+		if(lst[ind][4]=='R'):								
 			if(0<=int(lst[ind][5])<7):
 				if(lst[ind][7]=='R'):
 					if(0<=int(lst[ind][8])<7):		
@@ -288,8 +288,8 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(lst[ind][0:3]=='jmp'):						
-		y=lst[ind][4:len(lst[ind]):1]
+	if(lst[ind][0:3]=='jmp'):						#Handling Type E Instructions					
+		y=lst[ind][4:len(lst[ind]):1]					#Developer:-Rahul
 		if(y in label.keys()):
 			for i in dic:
 				if y==i:

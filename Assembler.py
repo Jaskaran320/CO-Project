@@ -1,25 +1,28 @@
 import sys
 R=['000','001','010','011','100','101','110']
 FLAGS='111'
-def decimalToBinary(n):
-	a=bin(n).replace("0b", "")
+def decimalToBinary(n):				# Converting integer to 8-bit binary number
+	a=bin(n).replace("0b", "")		# Developer:-SIDDHANT
 	while(len(a)!=8):
 		a='0'+a
 	return a
+
 f1=0
 f2=0
-f3=0
 lst=[]
 z=''
-for v in sys.stdin:
-	lst.append(v)
+lst1=[]
+
+for v in sys.stdin:			#Taking Input from file
+	lst.append(v)			#Developer:-Jaskaran
+	lst1.append(v)
 label={}
 dic={}
 i=0
 x=0
-lst1=lst
-while(i<len(lst)):
-	if(lst[i][0:3:1]=='var'):
+
+while(i<len(lst)):									# Handling Variables and labels.
+	if(lst[i][0:3:1]=='var'):						#Developer:- SIDDHANT
 		dic.update({lst[i][4:len(lst[i])-1:1]:0})
 		lst.remove(lst[i])
 		i-=1
@@ -33,22 +36,26 @@ while(i<len(lst)):
 	if(lst[i][0:3]=='hlt'):
 		f2+=1
 	i=i+1
+
 y=0
-for i in dic:
-	dic[i]=len(lst)+y
+for i in dic:					#storing the value of variable
+	dic[i]=len(lst)+y 			#Developer:-SIDDHANT
 	y=y+1
+
 ind=0
 while(ind<len(lst)):
 	lst[ind]=lst[ind].rstrip()
 	z=''
-	if(f1==1):
-		print('Line '+ str(ind+1) +' Error: Instruction after halt')
+	if(f1==1):															#Instruction after halt error handling
+		print('Line '+ str(ind+1) +' Error: Instruction after halt')	#Developer:- Jaskaran
 		break
 	word = lst[ind].split()
+	f3=0
+	f4=0
 
-	if(word[0]=='add'):
+	if(word[0]=='add'):													#Handling Type A Instructions
 		if(lst[ind][4]=='R' and int(word[1][-1:])<7 and lst[ind][7]=='R' and int(word[2][-1:])<7 and lst[ind][10]=='R' and int(word[3][-1:])<7):
-			x=word[1][-1:]
+			x=word[1][-1:]												# Developer:-JASKARAN
 			i2=str(R[int(x)])
 			y=word[2][-1:]
 			i3=str(R[int(y)])
@@ -56,7 +63,7 @@ while(ind<len(lst)):
 			i4=str(R[int(z)])
 			print('0000000'+i2+i3+i4)
 		elif(lst[ind][4:9:1]=='FLAGS' or lst[ind][7:12:1]=='FLAGS' or lst[ind][10:15:1]=='FLAGS'):
-			print('Line '+ str(ind+1)+" Error: Illegal use of FLAGS register")
+			print('Line '+ str(ind+1)+" Error: Illegal use of FLAGS register")  
 		else:
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
@@ -136,14 +143,18 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(word[0]=='ld'):
-		if(lst[ind][3]=='R' and int(word[1][-1:])<7):
+	if(word[0]=='ld'):								 #Handling Type D Instructions	
+		if(lst[ind][3]=='R' and int(word[1][-1:])<7):#Developer:-JASKARAN
 			x=word[1][-1:]
 			i2=str(R[int(x)])
 			y=word[2]
 			for i in dic:
 				if y==i:
 					z=decimalToBinary(dic[i])
+					f3=1
+			if(f3==0):
+				print('Line '+ str(ind+1)+" Error: Invalid variable")
+				break
 			while(len(z)!=8):
 				z='0'+z
 			print('00100'+i2+z)
@@ -153,7 +164,7 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(word[0]=='st'):
+	if(word[0]=='st'):				
 		if(lst[ind][3]=='R' and int(word[1][-1:])<7):
 			x=word[1][-1:]
 			i2=str(R[int(x)])
@@ -161,6 +172,10 @@ while(ind<len(lst)):
 			for i in dic:
 				if y==i:
 					z=decimalToBinary(dic[i])
+					f4=1
+			if(f4==0):
+				print('Line '+ str(ind+1)+" Error: Invalid variable")
+				break
 			while(len(z)!=8):
 				z='0'+z
 			print('00101'+i2+z)
@@ -169,10 +184,12 @@ while(ind<len(lst)):
 		else:
 			print('Line '+ str(ind+1)+' Error: Invalid syntax or register')
 			break
+
+
 	
-	if(lst[ind][0:3]=='mov'):
+	if(lst[ind][0:3]=='mov'):											#Handling Type B Instructions
 		if(lst[ind][4]=='R' and ((0<=int(lst[ind][5])<=6) and lst[ind][6]==" ")):
-			if( lst[ind][7]=='$'):
+			if( lst[ind][7]=='$'):										#Developer:-SIDDHANT
 				if(0<=int(lst[ind][8:len(lst[ind]):1])<=255):
 					print('00010'+R[int(lst[ind][5])]+decimalToBinary(int(lst[ind][8:len(lst[ind]):1])))
 				else:
@@ -212,8 +229,8 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(lst[ind][0:3]=='mov'):
-		if(lst[ind][4]=='R'):
+	if(lst[ind][0:3]=='mov'):						#Handling Type C Instructions
+		if(lst[ind][4]=='R'):						#Developer:-Rahul
 			if(0<=int(lst[ind][5])<7):
 				if(lst[ind][7]=='R'):
 					if(0<=int(lst[ind][8])<7):
@@ -256,8 +273,8 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(lst[ind][0:3]=='cmp'):
-		if(lst[ind][4]=='R'):
+	if(lst[ind][0:3]=='cmp'):								#Handling Type E Instructions					
+		if(lst[ind][4]=='R'):								#Developer:-Rahul
 			if(0<=int(lst[ind][5])<7):
 				if(lst[ind][7]=='R'):
 					if(0<=int(lst[ind][8])<7):		
@@ -271,7 +288,7 @@ while(ind<len(lst)):
 			print('Line '+ str(ind+1)+" Error: Invalid syntax or register")
 			break
 
-	if(lst[ind][0:3]=='jmp'):
+	if(lst[ind][0:3]=='jmp'):						
 		y=lst[ind][4:len(lst[ind]):1]
 		if(y in label.keys()):
 			for i in dic:
@@ -348,3 +365,18 @@ while(ind<len(lst)):
 	ind=ind+1
 if(f2==0):
 	print('Error: Missing halt instruction')
+
+k=0
+for i in range(len(lst1)):							#Handling variable instruction after halt
+	lst1[i]=lst1[i].rstrip()						
+	if(k>0 and lst1[i][0:3:1]=='var'):
+		print('Line '+ str(k+1) + ' Error: Instruction after halt')
+	if(lst1[i]=='hlt'):
+		k=i+1
+
+
+
+
+# Debugging and Running assembler for Hard and simple test cases:-SIDDHANT
+# Making Error statement:-Jaskaran, Rahul and Siddhant
+# Debugging Error Cases:- Jaskaran and Rahul

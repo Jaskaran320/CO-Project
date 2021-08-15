@@ -1,5 +1,5 @@
 import sys
-R=['000','001','010','011','100','101','110']
+R=['000','001','010','011','100','101','110'] #binary value of register.
 FLAGS='111'
 def decimalToBinary(n):				# Converting integer to 8-bit binary number
 	a=bin(n).replace("0b", "")		# Developer:-SIDDHANT

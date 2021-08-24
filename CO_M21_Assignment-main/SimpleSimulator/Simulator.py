@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt                     #for plotting.
 import numpy as np
 import sys
 lst=[]
@@ -37,7 +37,7 @@ pc=0
 
 while(pc<len(lst)-i):
     lst[pc]=lst[pc].rstrip()
-    y.append(pc)
+    y.append(pc)                            #collecting Co-ordinates for plot.
     x.append(z)
     if(lst[pc][0:5]=='00000'):                                                            #add
         V=0                                                                               #Developer:-JASKARAN
@@ -232,7 +232,7 @@ t=len(lst)
 while(t<256):                                                       #Developer:- SIDDHANT
     print('0000000000000000')
     t=t+1
-plt.scatter(x, y)
+plt.scatter(x, y)                                                   #plot code
 plt.ylabel('Address')
 plt.xlabel('Cycle')
 plt.show()

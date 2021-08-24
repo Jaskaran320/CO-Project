@@ -1,5 +1,10 @@
+import matplotlib.pyplot as plt
+import numpy as np
 import sys
 lst=[]
+x=[]
+y=[]
+z=0
 for v in sys.stdin:         #Taking Input from file
     lst.append(v)
 
@@ -32,6 +37,8 @@ pc=0
 
 while(pc<len(lst)-i):
     lst[pc]=lst[pc].rstrip()
+    y.append(pc)
+    x.append(z)
     if(lst[pc][0:5]=='00000'):                                                            #add
         V=0                                                                               #Developer:-JASKARAN
         L=0
@@ -217,6 +224,7 @@ while(pc<len(lst)-i):
         print(Dtob(pc)+' '+ Dtob2(REG[0])+' '+ Dtob2(REG[1])+' '+ Dtob2(REG[2])+' '+ Dtob2(REG[3])+' '+ Dtob2(REG[4])+' '+ Dtob2(REG[5])+' '+ Dtob2(REG[6])+' '+ '000000000000'+str(V)+str(L)+str(G)+str(E))
 
     pc+=1                                                                   #Developer:- SIDDHANT
+    z+=1
     
 for i in lst:
     print(i)
@@ -224,3 +232,7 @@ t=len(lst)
 while(t<256):                                                       #Developer:- SIDDHANT
     print('0000000000000000')
     t=t+1
+plt.scatter(x, y)
+plt.ylabel('Address')
+plt.xlabel('Cycle')
+plt.show()

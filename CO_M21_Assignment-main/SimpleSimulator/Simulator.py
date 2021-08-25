@@ -1,5 +1,4 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.pyplot as plt                                 #importing modules
 import sys
 lst=[]
 x=[]
@@ -236,7 +235,7 @@ t=len(lst)
 while(t<256):                                                       #Developer:- SIDDHANT
     print('0000000000000000')
     t=t+1
-plt.scatter(x, y)
+plt.scatter(x, y)                                                       #scatter plot
 plt.ylabel('Address')                                                   #Developer:- Jaskaran
 plt.xlabel('Cycle')
 plt.show()

@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt                     #for plotting.
+import matplotlib.pyplot as plt
 import numpy as np
 import sys
 lst=[]
@@ -37,7 +37,7 @@ pc=0
 
 while(pc<len(lst)-i):
     lst[pc]=lst[pc].rstrip()
-    y.append(pc)                            #collecting Co-ordinates for plot.
+    y.append(pc)
     x.append(z)
     if(lst[pc][0:5]=='00000'):                                                            #add
         V=0                                                                               #Developer:-JASKARAN
@@ -185,12 +185,14 @@ while(pc<len(lst)-i):
         E=0                                                            
         print(Dtob(pc)+' '+ Dtob2(REG[0])+' '+ Dtob2(REG[1])+' '+ Dtob2(REG[2])+' '+ Dtob2(REG[3])+' '+ Dtob2(REG[4])+' '+ Dtob2(REG[5])+' '+ Dtob2(REG[6])+' '+ '000000000000'+str(V)+str(L)+str(G)+str(E))
         pc=BtoD(lst[pc][8:16])
+        z+=1
         continue
 
     if(lst[pc][0:5]=='10000'):                                                            #jlt
         if(L==1):
             print(Dtob(pc)+' '+ Dtob2(REG[0])+' '+ Dtob2(REG[1])+' '+ Dtob2(REG[2])+' '+ Dtob2(REG[3])+' '+ Dtob2(REG[4])+' '+ Dtob2(REG[5])+' '+ Dtob2(REG[6])+' '+ '000000000000'+str(V)+str(L)+str(G)+str(E))
             pc=BtoD(lst[pc][8:16])
+            z+=1
             continue                                                                      #Developer:- Jaskaran
         V=0
         L=0
@@ -202,6 +204,7 @@ while(pc<len(lst)-i):
         if(G==1):
             print(Dtob(pc)+' '+ Dtob2(REG[0])+' '+ Dtob2(REG[1])+' '+ Dtob2(REG[2])+' '+ Dtob2(REG[3])+' '+ Dtob2(REG[4])+' '+ Dtob2(REG[5])+' '+ Dtob2(REG[6])+' '+ '000000000000'+str(V)+str(L)+str(G)+str(E))
             pc=BtoD(lst[pc][8:16])
+            z+=1
             continue
         V=0                                                                    #Developer:- Rahul
         L=0
@@ -213,6 +216,7 @@ while(pc<len(lst)-i):
         if(E==1):
             print(Dtob(pc)+' '+ Dtob2(REG[0])+' '+ Dtob2(REG[1])+' '+ Dtob2(REG[2])+' '+ Dtob2(REG[3])+' '+ Dtob2(REG[4])+' '+ Dtob2(REG[5])+' '+ Dtob2(REG[6])+' '+ '000000000000'+str(V)+str(L)+str(G)+str(E))
             pc=BtoD(lst[pc][8:16])
+            z+=1
             continue                                                         #Developer:- Jaskaran
         V=0
         L=0
@@ -232,7 +236,7 @@ t=len(lst)
 while(t<256):                                                       #Developer:- SIDDHANT
     print('0000000000000000')
     t=t+1
-plt.scatter(x, y)                                                   #plot code
-plt.ylabel('Address')
+plt.scatter(x, y)
+plt.ylabel('Address')                                                   #Developer:- Jaskaran
 plt.xlabel('Cycle')
 plt.show()

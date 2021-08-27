@@ -237,5 +237,5 @@ while(t<256):                                                       #Developer:-
     t=t+1
 plt.scatter(x, y)                                                       #scatter plot
 plt.ylabel('Address')                                                   #Developer:- Jaskaran
-plt.xlabel('Cycle')
+plt.xlabel('Cycle')                                                     #plotting graph for bonus question
 plt.show()
